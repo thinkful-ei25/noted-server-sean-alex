@@ -8,12 +8,24 @@ const cors = require('cors');
 
 
 const { PORT, MONGODB_URI } = require('./config'); 
+const localStrategy = require('./passport/local'); 
+const jwtStrategy = require('./passport/jwt'); 
+
+const authRouter = require('./routes/auth'); 
+const userRouter = require('./routes/users'); 
 
 const app = express(); 
 
 app.use(morgan(process.env.NODE_ENV === 'developemnet' ? 'dev' : 'common', { 
   skip: () => process.env.NODE_ENV === 'test'
 })); 
+
+app.use(express.json());
+
+passport.use(localStrategy); 
+passport.use(jwtStrategy); 
+
+const jwtAuth =  passport.authenticate('jwt', { session: false, failWithError: true }); 
 
 // Custom 404 Not Found Error Handler
 app.use((req, res, next) => { 
