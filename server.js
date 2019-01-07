@@ -6,29 +6,40 @@ const morgan = require('morgan');
 const passport = require('passport'); 
 const cors = require('cors'); 
 
+const { PORT, CLIENT_ORIGIN, DATABASE_URL } = require('./config'); 
 
-const { PORT, MONGODB_URI } = require('./config'); 
 const localStrategy = require('./passport/local'); 
 const jwtStrategy = require('./passport/jwt'); 
 
 const authRouter = require('./routes/auth'); 
-const userRouter = require('./routes/users'); 
+const userRouter = require('./routes/user'); 
 
 const app = express(); 
-
-app.use(morgan(process.env.NODE_ENV === 'developemnet' ? 'dev' : 'common', { 
-  skip: () => process.env.NODE_ENV === 'test'
-})); 
+mongoose.Promise = global.Promise; 
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+); 
+
+app.use(morgan(process.env.NODE_ENV === 'developement' ? 'dev' : 'common', { 
+  skip: () => process.env.NODE_ENV === 'test'
+})); 
 
 passport.use(localStrategy); 
 passport.use(jwtStrategy); 
 
 const jwtAuth =  passport.authenticate('jwt', { session: false, failWithError: true }); 
 
-app.use('/api/users', usersRouter); 
+app.use('/api/user', userRouter); 
 app.use('/api', authRouter); 
+
+app.get('/hi', (req, res) => { 
+  return res.send('bye'); 
+}); 
 
 // Custom 404 Not Found Error Handler
 app.use((req, res, next) => { 
@@ -47,20 +58,20 @@ app.use((err, req, res, next) => {
   }
 }); 
 
-if (require.main === module) { 
-  mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+if (require.main === module) {
+  mongoose.connect(DATABASE_URL, {useNewUrlParser: true })
     .then(instance => { 
       const conn = instance.connections[0]; 
-      console.log(`Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`); 
+      console.info(`Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`);
     })
     .catch(err => { 
-      console.error(err); 
+      console.error('Error connecting to MONGO:', err); 
     }); 
 
     app.listen(PORT, function () { 
       console.info(`Server listening on ${this.address().port}`); 
     }).on('error', err => { 
-      console.error(err); 
+      console.error('Error connecting to the SERVER:', err); 
     }); 
 }
 

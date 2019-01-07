@@ -7,7 +7,6 @@ const User = require('../models/user');
 const router = express.Router(); 
 
 router.post('/', (req, res, next) => { 
-
   //REQUIRE FIELDS
   const requiredFields = ['username', 'password']; 
   const missingField = requiredFields.find(field => !(field in req.body)); 
@@ -15,7 +14,7 @@ router.post('/', (req, res, next) => {
   if (missingField)  { 
     const err = new Error(`Missing '${missingField}' in request body`); 
     err.status = 422; 
-    return next(err); 
+    return next(err);
   }
 
   //REQUIRE FIELDS TYPE STRING
@@ -95,3 +94,5 @@ router.post('/', (req, res, next) => {
       next(err);
     });
 }); 
+
+module.exports = router;  
