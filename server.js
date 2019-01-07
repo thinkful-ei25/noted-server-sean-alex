@@ -27,6 +27,9 @@ passport.use(jwtStrategy);
 
 const jwtAuth =  passport.authenticate('jwt', { session: false, failWithError: true }); 
 
+app.use('/api/users', usersRouter); 
+app.use('/api', authRouter); 
+
 // Custom 404 Not Found Error Handler
 app.use((req, res, next) => { 
   const err = new Error('Not Found'); 
