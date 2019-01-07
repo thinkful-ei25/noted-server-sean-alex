@@ -71,7 +71,7 @@ router.post('/', (req, res, next) => {
   }
 
   // Username and password were validated as pre-trimmed
-  let { username, password, fullname = '' } = req.body;
+  let { username, password, fullname } = req.body;
   fullname = fullname.trim();
 
   return User.hashPassword(password)
