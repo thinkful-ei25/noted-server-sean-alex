@@ -13,5 +13,5 @@ module.exports = {
     process.env.TEST_DATABASE_URL || 'mongodb://localhost/NOTED-test', 
 
   JWT_SECRET : process.env.JWT_SECRET, 
-  JWT_EXPIRTY : process.env.JWT_EXPIRTY || '7d'
+  JWT_EXPIRY : process.env.JWT_EXPIRY || '7d'
 };
