@@ -1,6 +1,5 @@
 'use strict'; 
 
-//test heroku
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose'); 
 
