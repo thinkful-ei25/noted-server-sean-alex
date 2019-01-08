@@ -7,6 +7,7 @@ const passport = require('passport');
 const cors = require('cors'); 
 
 const { PORT, CLIENT_ORIGIN, DATABASE_URL } = require('./config'); 
+const seedData = require('./utils/seed-database'); 
 
 const localStrategy = require('./passport/local'); 
 const jwtStrategy = require('./passport/jwt'); 
@@ -63,6 +64,7 @@ if (require.main === module) {
     .then(instance => { 
       const conn = instance.connections[0]; 
       console.info(`Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`);
+      seedData(); 
     })
     .catch(err => { 
       console.error('Error connecting to MONGO:', err); 
