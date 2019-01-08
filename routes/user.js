@@ -2,6 +2,7 @@
 
 const express = require('express'); 
 
+const seedQuestions = require('../utils/seed-questions'); 
 const User = require('../models/user'); 
 
 const router = express.Router(); 
@@ -74,12 +75,19 @@ router.post('/', (req, res, next) => {
   let { username, password, fullname } = req.body;
   fullname = fullname.trim();
 
-  return User.hashPassword(password)
+  let questions; 
+
+  seedQuestions().then(result => { 
+    questions = result; 
+    console.log(result); 
+    return User.hashPassword(password); 
+  })
     .then(digest => {
       const newUser = {
         username,
         password: digest,
-        fullname
+        fullname, 
+        questions
       };
       return User.create(newUser);
     })
