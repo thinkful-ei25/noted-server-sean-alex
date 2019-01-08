@@ -6,7 +6,14 @@ const schema = new mongoose.Schema({
   img: { type: String , required: true },
   name: { type: String, required: true }, 
   function: { type: String, required: true}, 
-  // mValue: { type: Number, required: true, defualt: 1}
 }); 
+
+schema.set('toJSON', { 
+  virtual: true, 
+  transform: (doc, result) => { 
+    delete result._id; 
+    delete result.__v; 
+  }
+});
 
 module.exports = mongoose.model('Question', schema); 

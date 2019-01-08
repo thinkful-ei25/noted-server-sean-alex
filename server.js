@@ -14,6 +14,7 @@ const jwtStrategy = require('./passport/jwt');
 const authRouter = require('./routes/auth'); 
 const userRouter = require('./routes/user'); 
 const questionRouter = require('./routes/question'); 
+const scoreRouter = require('./routes/score'); 
 
 const app = express(); 
 mongoose.Promise = global.Promise; 
@@ -37,11 +38,8 @@ const jwtAuth =  passport.authenticate('jwt', { session: false, failWithError: t
 
 app.use('/api/user', userRouter); 
 app.use('/api', authRouter); 
-app.use('/api/question', authRouter); 
-
-app.get('/hi', (req, res) => { 
-  return res.send('bye'); 
-}); 
+app.use('/api/question', jwtAuth, questionRouter); 
+app.use('/api/score', jwtAuth, scoreRouter); 
 
 // Custom 404 Not Found Error Handler
 app.use((req, res, next) => { 

@@ -52,6 +52,7 @@ router.post('/', (req, res, next) => {
     field => 'min' in sizedFields[field] &&
       req.body[field].trim().length < sizedFields[field].min
   );
+  
   if (tooSmallField) {
     const min = sizedFields[tooSmallField].min;
     const err = new Error(`Field: '${tooSmallField}' must be at least ${min} characters long`);
