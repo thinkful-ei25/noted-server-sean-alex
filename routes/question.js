@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
     .populate('questions')
     .then(result => {
       const question = result.question[0];  
-      res.json(question); 
+      res.json({question}); 
     }); 
 }); 
 

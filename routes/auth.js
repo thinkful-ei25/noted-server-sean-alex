@@ -10,14 +10,14 @@ const router = express.Router();
 
 const localAuth = passport.authenticate('local', { session: false, failWithError: true });
 
-router.post('/auth/login', localAuth, (req, res) => {
+router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user);
   res.json({ authToken });
 });
 
 const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
-router.post('/auth/refresh', jwtAuth, (req, res) => {
+router.post('/refresh', jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);
   res.json({ authToken });
 });
