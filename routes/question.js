@@ -12,10 +12,7 @@ router.get('/', (req, res, next) => {
   User.findOne({ userId })
     .populate('questions')
     .then(result => { 
-      console.log(result.questions[0].name); 
-      // console.log(result.function)
       const question = result.questions[0]; 
-
       res.json(question); 
     }); 
 }); 
