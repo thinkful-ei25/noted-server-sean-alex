@@ -1,6 +1,7 @@
-'use strict'
+'use strict';
 
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router(); 
 
 
@@ -8,26 +9,68 @@ const User = require('../models/user');
 
 let count = 0; 
 router.post('/', (req, res, next) => { 
-  console.log('yoo'); 
-  const fullname = req.user.fullname;
-  const id = req.user._id;  
+  const username  = req.user.username; 
+  const { guess } = req.body;
+  let isValid;
+  console.log(guess); 
 
-  // const { name, definition } = req.body; 
-  // console.log('userId score', userId); 
-  console.log('fullname', fullname);
-  console.log('id', id); 
-  console.log('user', req.user); 
-  // let isValid; 
+  User.findOne({ username }, function (err, result) {
+    const answer = result.questions[result.head];
+    console.log(answer.name);
+    isValid = (guess === answer.name);
+    let memoryScore = ((guess.guess === answer) ? 2 : 0.5) * result.questions[result.head].memoryStrength;
+    
+    if (err) {
+      console.log('Error,', err);
+      throw new Error(err);
+    } 
+    else {
+      result.questions[result.head].memoryStrength = memoryScore;
+      result.save();
 
-  User.find( {fullname} )
-    .then(result => { 
-      // console.log('result', result); 
+      return res.json({isValid});
+    }
+  });
+
+
+
+  User.findOne({ username })
+    .then(result => {
+      const answeredIndex = result.head;
+      const answered = result.questions[result.head];
+      isValid = (guess === answered.name);
+      if(isValid === true){
+        answered.memoryStrength *=2;
+      }
+      else {
+        answered.memoryStrength = 1;
+      }
+
+      result.head = answered.next;
+
+      let current = answered;
+      for(let i=0; i<answered.memoryStrength; i++){
+        const nextIndex = current.next;
+        if(nextIndex === null){
+          break;
+        }
+        current = result.questions[nextIndex];
+      }
+
+      answered.next = current.next;
+      current.next = answeredIndex;
+      
+      result.save();
+      return res.json({isValid});
     })
-    .catch(err => { 
-      console.err('err', err); 
-    }); 
+    // .then(results =>{ 
+    //   console.log(results.questions[results.head].memoryStrength);
+    //   res.json(results);
+    // })
+    .catch(err => console.log(err));
+
+  // User.findOne( {userId})
   //   .then(result => {
-  //     console.log('hello'); 
   //     count += 1; 
   //     let index = count % 3; 
   //     const answer = result.questions[index];
@@ -40,9 +83,9 @@ router.post('/', (req, res, next) => {
   //     //SCORE FOR THAT WORD
   //     let score = ((isValid === true) ? 2 : 0.5) * result.questions[result.head].memoryStrength;
   //     console.log('memoryStrength', answer.memoryStrength);
-  //     console.log(isValid); 
-  //   }); 
-  //     return User.updateOne({_id: userId, questions: answer.name}, {$set: {$arrayElemAt:[questions, index]}}, {new: true});
+  //     console.log(isValid);
+  //     mongoose.set('debug', true); 
+  //     return User.updateOne({ _id: userId }, {$set: {'questions.0.memoryStrength': score}});
   //   })
   //   .then(result => {
   //     console.log(result);

@@ -6,16 +6,21 @@ const User = require('../models/user');
 
 const router = express.Router(); 
 
-let count = 0; 
 
 router.get('/', (req, res, next) => { 
+<<<<<<< HEAD
   const fullname = req.user.fullname;
   // console.log('userId', userId); 
 
   User.findOne({ fullname })
+=======
+  const username = req.user.username;
+
+  User.findOne({ username })
+>>>>>>> 5b8626bd43513e97d89ffbaff554324f32fdfc2e
     .then(result => { 
-      count++; 
-      let index = count % 3;
+      let index = result.head;
+      console.log(index);
       const question = result.questions[index]; 
       res.json(question); 
     }); 
