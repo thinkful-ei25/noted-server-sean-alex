@@ -10,8 +10,9 @@ router.get('/', (req, res, next) => {
 
   User.findOne({ userId })
     .populate('questions')
-    .then(result => { 
-      res.json(result.questions[0]); 
+    .then(result => {
+      const question = result.question[0];  
+      res.json(question); 
     }); 
 }); 
 
