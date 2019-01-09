@@ -80,7 +80,6 @@ router.post('/', (req, res, next) => {
 
   seedQuestions().then(result => { 
     questions = result; 
-    console.log(result); 
     return User.hashPassword(password); 
   })
     .then(digest => {
