@@ -1,5 +1,6 @@
 'use strict'; 
 
+
 const express = require('express'); 
 const User = require('../models/user');
 
@@ -10,9 +11,12 @@ router.get('/', (req, res, next) => {
 
   User.findOne({ userId })
     .populate('questions')
-    .then(result => {
-      const question = result.question[0];  
-      res.json({question}); 
+    .then(result => { 
+      console.log(result.questions[0].name); 
+      // console.log(result.function)
+      const question = result.questions[0]; 
+
+      res.json(question); 
     }); 
 }); 
 
