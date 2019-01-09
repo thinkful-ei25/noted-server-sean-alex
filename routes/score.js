@@ -7,34 +7,35 @@ const Question = require('../models/question');
 const User = require('../models/user'); 
 
 let count = 0; 
-router.post('/', (req, res) => { 
+router.post('/', (req, res, next) => { 
   const userId = req.user.id; 
   const { name, definition } = req.body; 
   
   let isValid; 
 
   User.findOne( {userId} )
-    .populate('questions')
     .then(result => {
       count += 1; 
       let index = count % 3; 
-      const answer = result.questions[index]; 
+      const answer = result.questions[index];
+      const questionArr = result.questions;
       //JUST THE NAME RIGHT NOW
       // const isValid = 
       //   (name === answer.name && definition === answer.function) ? true : false; 
       isValid = (name === answer.name); 
 
       //SCORE FOR THAT WORD
- 
-      const score = ((isValid === true) ? 0.25 : -0.25) + answer.score;
-      console.log('mValue', answer.mValue);  
-      return Question.updateOne({name: answer.name}, {mValue: score}); 
+      let score = ((isValid === true) ? 2 : 0.5) * result.questions[result.head].memoryStrength;
+      console.log('memoryStrength', answer.memoryStrength);
+      console.log(isValid); 
+      return User.updateOne({_id: userId, questions: answer.name}, {$set: {$arrayElemAt:[questions, index]}}, {new: true});
     })
-      .then(result => { 
-        console.log('update value', result.mValue); 
-        res.json(isValid);  
-
-      });  
+    .then(result => {
+      console.log(result);
+      console.log('update value', result.memoryStrength); 
+      res.json(isValid);
+    })
+    .catch(err => next(err));
 }); 
 
 module.exports = router; 

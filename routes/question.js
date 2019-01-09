@@ -12,11 +12,9 @@ router.get('/', (req, res, next) => {
   const userId = req.user.id;
 
   User.findOne({ userId })
-    .populate('questions')
     .then(result => { 
       count++; 
-      let index = count % 3; 
-      const answer = result.questions[index]; 
+      let index = count % 3;
       const question = result.questions[index]; 
       res.json(question); 
     }); 

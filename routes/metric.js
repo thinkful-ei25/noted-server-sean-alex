@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   console.log('user', req.user.fullname); 
 
   //TEMP
-  res.json('Metrics are at thhe met'); 
+  res.json('Metrics are at thhe met YO'); 
 }); 
 
 module.exports = router; 
