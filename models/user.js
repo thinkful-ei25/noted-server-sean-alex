@@ -7,7 +7,15 @@ const schema = new mongoose.Schema({
   fullname: { type: String, default: '' }, 
   username: { type: String, required: true, unique: true }, 
   password: { type: String, required: true}, 
-  questions : [{type: mongoose.Schema.Types.ObjectId, ref : 'Question', required: true}]
+  questions : [{
+    _id: mongoose.Schema.Types.ObjectId, 
+    img: String, 
+    name: String,
+    description: String, 
+    memoryStrength: Number, 
+    next: Number
+  }],
+  head: {type: Number, default: 0}
 }); 
 
 schema.set('toJSON', { 
