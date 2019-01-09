@@ -23,7 +23,7 @@ const questions = [
     name: 'Breath Mark', 
     description: 'take a breath', 
     memoryStrength: 0,
-    next: 0
+    next: null
   }
 ]; 
 

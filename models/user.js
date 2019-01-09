@@ -21,6 +21,7 @@ const schema = new mongoose.Schema({
 schema.set('toJSON', { 
   virtual: true, 
   transform: (doc, result) => { 
+    // doc._id = result.id;
     delete result._id; 
     delete result.__v; 
     delete result.password; 
@@ -34,6 +35,8 @@ schema.methods.validatePassword = function (pwd) {
 
 schema.statics.hashPassword = function (pwd) { 
   return bcrypt.hash(pwd, 10); 
-}; 
+};
+
+
 
 module.exports = mongoose.model('User', schema); 
