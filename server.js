@@ -37,10 +37,11 @@ passport.use(jwtStrategy);
 
 const jwtAuth =  passport.authenticate('jwt', { session: false, failWithError: true }); 
 
+app.use('/api/score', jwtAuth, scoreRouter); 
 app.use('/api/user', userRouter); 
 app.use('/api/auth', authRouter); 
 app.use('/api/question', jwtAuth, questionRouter); 
-app.use('/api/score', jwtAuth, scoreRouter); 
+
 app.use('/api/metric', jwtAuth, metricRouter); 
 
 // Custom 404 Not Found Error Handler

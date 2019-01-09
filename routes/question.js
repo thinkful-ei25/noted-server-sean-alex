@@ -9,9 +9,10 @@ const router = express.Router();
 let count = 0; 
 
 router.get('/', (req, res, next) => { 
-  const userId = req.user.id;
+  const fullname = req.user.fullname;
+  // console.log('userId', userId); 
 
-  User.findOne({ userId })
+  User.findOne({ fullname })
     .then(result => { 
       count++; 
       let index = count % 3;

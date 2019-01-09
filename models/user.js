@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   username: { type: String, required: true, unique: true }, 
   password: { type: String, required: true}, 
   questions : [{
-    _id: mongoose.Schema.Types.ObjectId, 
+    // _id: mongoose.Schema.Types.ObjectId, 
     img: String, 
     name: String,
     description: String, 
@@ -21,7 +21,7 @@ const schema = new mongoose.Schema({
 schema.set('toJSON', { 
   virtual: true, 
   transform: (doc, result) => { 
-    delete result._id; 
+    // delete result._id; 
     delete result.__v; 
     delete result.password; 
   }
