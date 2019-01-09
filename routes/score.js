@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
     .then(result => {
       const answer = result.questions[0]; 
       const isValid = 
-        (name === answer.name && definition === answer.function) ? 'Correct' : 'Incorrect'; 
+        (name === answer.name && definition === answer.function) ? true : false; 
         res.json(isValid); 
     }); 
 }); 

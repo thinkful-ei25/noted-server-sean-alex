@@ -15,6 +15,7 @@ const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user'); 
 const questionRouter = require('./routes/question'); 
 const scoreRouter = require('./routes/score'); 
+const metricRouter = require('./routes/metric'); 
 
 const app = express(); 
 mongoose.Promise = global.Promise; 
@@ -40,6 +41,7 @@ app.use('/api/user', userRouter);
 app.use('/api', authRouter); 
 app.use('/api/question', jwtAuth, questionRouter); 
 app.use('/api/score', jwtAuth, scoreRouter); 
+app.use('/api/metric', jwtAuth, metricRouter); 
 
 // Custom 404 Not Found Error Handler
 app.use((req, res, next) => { 
