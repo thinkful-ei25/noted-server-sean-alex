@@ -14,10 +14,9 @@ router.get('/', (req, res) => {
 
 router.post('/startSession', (req, res) => { 
   const username = req.user.username; 
-  // console.log('username', username); 
+
   User.findOne({ username })
       .then(result => { 
-      console.log('sessions', result.sessions.length); 
       
       const sessions = result.sessions; 
       const sessionsCopy = [...sessions]; 
@@ -32,7 +31,26 @@ router.post('/startSession', (req, res) => {
 }); 
 
 router.post('/endSession', (req, res) => { 
-  // const username = req.user.username; 
+  const username = req.user.username; 
+
+  console.log('ENDING SESSION!'); 
+  User.findOne({ username })
+    .then(result => { 
+      const currAnswers = result.sessions[result.sessions.length -1].answers; 
+
+      let sumAnswers; 
+      currAnswers.forEach(item => { 
+        console.log(item); 
+        sumAnswers+=item
+      }); 
+      console.log('sum', sumAnswers); 
+
+      result.sessions[result.sessions.length- 1].sumScore = {sum: sumAnswers};     
+      result.save();
+    })
+    .catch(err => { 
+      console.error('err', err); 
+    }); 
 
 })
 
