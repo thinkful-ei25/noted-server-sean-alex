@@ -42,7 +42,7 @@ router.post('/', (req, res, next) => {
       }
       const currMemoryStrength = answered.memoryStrength; 
 
-      result.sessions[result.sessions.length-1].answers.push({answer: scoreVal, question: answered}); 
+      result.sessions[result.sessions.length-1].answers.push({answer: scoreVal, questionName: answered.name}); 
       result.head = answered.next;
 
       let current = answered;

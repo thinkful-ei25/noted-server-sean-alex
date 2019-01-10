@@ -20,8 +20,8 @@ const schema = new mongoose.Schema(
     sumScore: { type: Number},
     
     answers: [{ 
-      answer: { formType: Number}, 
-      question: { formType: String} 
+      answer: { type: Number, default: 0},  
+      questionName: { type: String, default: ''} 
     }]
   }], 
   // currentAverage: { type: Number, default: 0}, 

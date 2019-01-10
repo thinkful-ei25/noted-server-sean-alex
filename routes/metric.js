@@ -13,10 +13,8 @@ router.get('/', (req, res) => {
 }); 
 
 router.post('/startSession', (req, res) => { 
-  console.log('hello James James')
-  //START SESSION
   const username = req.user.username; 
-  console.log('username', username); 
+  // console.log('username', username); 
   User.findOne({ username })
       .then(result => { 
       console.log('sessions', result.sessions.length); 
@@ -32,5 +30,10 @@ router.post('/startSession', (req, res) => {
     }); 
   
 }); 
+
+router.post('/endSession', (req, res) => { 
+  // const username = req.user.username; 
+
+})
 
 module.exports = router; 
