@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router(); 
 
 
@@ -11,8 +10,8 @@ let count = 0;
 router.post('/', (req, res, next) => { 
   const username  = req.user.username; 
   const { guess } = req.body;
+
   let isValid;
-  console.log(guess); 
 
   User.findOne({ username })
     .then(result => {
