@@ -37,15 +37,18 @@ router.post('/', (req, res, next) => {
         console.error('memoryStrength cannot be 0'); 
         answered.memoryStrength = 1; 
       } 
-
+      let scoreVal; 
       if(isValid === true){
+        scoreVal = 1; 
         answered.memoryStrength *=2;
       }
       else {
+        scoreVal = 0; 
         answered.memoryStrength = 1;
       }
       const currMemoryStrength = answered.memoryStrength; 
-      // console.log('answered memoryStrength', answered.memoryStrength); 
+
+      result.sessions[result.sessions.length-1].answers.push({answer: scoreVal, question: answered}); 
       result.head = answered.next;
       // console.log('new head', result.head, 'answered.next', answered.next); 
 

@@ -17,10 +17,12 @@ const schema = new mongoose.Schema(
     next: Number
   }],
   sessions : [{ 
-    sumScore: { type: Number, default: 0},
-    answers: [ 
-      { answer: { type: Number } }
-    ]
+    sumScore: { type: Number},
+    
+    answers: [{ 
+      answer: { formType: Number}, 
+      question: { formType: String} 
+    }]
   }], 
   // currentAverage: { type: Number, default: 0}, 
   // runningAverage: { type: Number, default: 0}, 
