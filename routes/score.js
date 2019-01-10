@@ -45,7 +45,7 @@ router.post('/', (req, res, next) => {
       else {
         answered.memoryStrength = 1;
       }
-
+      const currMemoryStrength = answered.memoryStrength; 
       // console.log('answered memoryStrength', answered.memoryStrength); 
       result.head = answered.next;
       // console.log('new head', result.head, 'answered.next', answered.next); 
@@ -66,7 +66,7 @@ router.post('/', (req, res, next) => {
       current.next = answeredIndex;
       
       result.save();
-      return res.json({isValid});
+      return res.json({isValid, score: currMemoryStrength});
     })
     .catch(err => console.log('err', err));
 }); 
