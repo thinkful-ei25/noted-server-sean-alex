@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     img: String, 
     name: String,
     description: String, 
-    memoryStrength: Number, 
+    memoryStrength: { type: Number, default: 1 },  
     next: Number
   }],
   head: {type: Number, default: 0}
@@ -21,12 +21,8 @@ const schema = new mongoose.Schema({
 schema.set('toJSON', { 
   virtual: true, 
   transform: (doc, result) => { 
-<<<<<<< HEAD
-    // delete result._id; 
-=======
     // doc._id = result.id;
     delete result._id; 
->>>>>>> 5b8626bd43513e97d89ffbaff554324f32fdfc2e
     delete result.__v; 
     delete result.password; 
   }
