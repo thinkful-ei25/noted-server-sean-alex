@@ -19,7 +19,7 @@ router.post('/', (req, res, next) => {
       let answeredIndex = result.head;
       
       if (answeredIndex === null) { 
-        console.log('ANSWERED INDEX SHOULD NOT BE NULL'); 
+        console.error('ANSWERED INDEX SHOULD NOT BE NULL'); 
         answeredIndex = 0; 
       }
 
@@ -35,11 +35,11 @@ router.post('/', (req, res, next) => {
 
       //MEMORY STRENGTH SHOULD NOT BE 0
       if (answered.memoryStrength === 0) { 
+        console.error('memoryStrength cannot be 0'); 
         answered.memoryStrength = 1; 
       } 
 
       if(isValid === true){
-      
         answered.memoryStrength *=2;
       }
       else {
@@ -49,6 +49,8 @@ router.post('/', (req, res, next) => {
       console.log('answered memoryStrength', answered.memoryStrength); 
 
       result.head = answered.next;
+      console.log('new head', result.head, 'answered.next', answered.next); 
+
       let current = answered;
       for(let i=0; i<answered.memoryStrength; i++){
         const nextIndex = current.next;
