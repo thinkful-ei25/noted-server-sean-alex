@@ -23,15 +23,15 @@ router.post('/', (req, res, next) => {
         answeredIndex = 0; 
       }
 
-      console.log('answeredIndex', answeredIndex); 
+      // console.log('answeredIndex', answeredIndex); 
       const answered = result.questions[answeredIndex];
 
       isValid = (guess === answered.name);
-      console.log(
-        'isValid', isValid, 
-        'answered name', answered.name, 
-        'answered memoryStrength', answered.memoryStrength  
-      );
+      // console.log(
+      //   'isValid', isValid, 
+      //   'answered name', answered.name, 
+      //   'answered memoryStrength', answered.memoryStrength  
+      // );
 
       //MEMORY STRENGTH SHOULD NOT BE 0
       if (answered.memoryStrength === 0) { 
@@ -46,10 +46,9 @@ router.post('/', (req, res, next) => {
         answered.memoryStrength = 1;
       }
 
-      console.log('answered memoryStrength', answered.memoryStrength); 
-
+      // console.log('answered memoryStrength', answered.memoryStrength); 
       result.head = answered.next;
-      console.log('new head', result.head, 'answered.next', answered.next); 
+      // console.log('new head', result.head, 'answered.next', answered.next); 
 
       let current = answered;
       for(let i=0; i<answered.memoryStrength; i++){
