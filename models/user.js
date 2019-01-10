@@ -18,14 +18,15 @@ const schema = new mongoose.Schema(
   }],
   sessions : [{ 
     sumScore: { type: Number, default:0},
+    sessionAvg: {type: Number, default:0 },
     
     answers: [{ 
       answer: { type: Number, default: 0},  
       questionName: { type: String, default: ''} 
     }]
   }], 
-  // currentAverage: { type: Number, default: 0}, 
-  // runningAverage: { type: Number, default: 0}, 
+  
+  allSessionsAvg: { type: Number, default: 0}, 
   // numSession: { type: Number, default: 0 }, 
   // improvmenet : { type: Number, default: 0 }, 
   head: {type: Number, default: 0}
