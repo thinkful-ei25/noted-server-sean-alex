@@ -16,7 +16,7 @@ router.post('/startSession', (req, res) => {
   const username = req.user.username; 
 
   User.findOne({ username })
-      .then(result => { 
+    .then(result => { 
       
       const sessions = result.sessions; 
       const sessionsCopy = [...sessions]; 
@@ -38,14 +38,14 @@ router.post('/endSession', (req, res) => {
     .then(result => { 
       const currAnswers = result.sessions[result.sessions.length -1].answers; 
 
-      let sumAnswers; 
+      let sumAnswers =0; 
       currAnswers.forEach(item => { 
         console.log(item); 
-        sumAnswers+=item
+        sumAnswers+= item.answer;
       }); 
       console.log('sum', sumAnswers); 
 
-      result.sessions[result.sessions.length- 1].sumScore = {sum: sumAnswers};     
+      result.sessions[result.sessions.length- 1].sumScore = sumAnswers;     
       result.save();
     })
     .catch(err => { 

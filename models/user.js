@@ -17,7 +17,7 @@ const schema = new mongoose.Schema(
     next: Number
   }],
   sessions : [{ 
-    sumScore: { type: Number},
+    sumScore: { type: Number, default:0},
     
     answers: [{ 
       answer: { type: Number, default: 0},  
