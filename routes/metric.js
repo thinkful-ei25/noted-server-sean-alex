@@ -21,9 +21,6 @@ router.get('/', (req, res, next) => {
         sumSessions += item.sumScore;
         sumOfQuestions += item.answers.length;
       });
-
-      console.log('total avg', sumSessions);
-
       result.allSessionsAvg = (sumSessions / sumOfQuestions);
 
       const currAvg = result.sessions[result.sessions.length -1].sessionAvg; 
@@ -38,8 +35,7 @@ router.get('/', (req, res, next) => {
       let recent = result.sessions[result.sessions.length-1].sumScore;
       let recentAvg = result.sessions[result.sessions.length-1].sessionAvg;
       let improvement = result.improvement; 
-      console.log('improvement', improvement); 
-      res.json({lastSessionScore: recent, lastSessionAvg: recentAvg, allSessionsAvg: allSessionsAvg});
+      res.json({lastSessionScore: recent, lastSessionAvg: recentAvg, allSessionsAvg: allSessionsAvg, improvement});
     })
     .catch(err => next(err));
 
