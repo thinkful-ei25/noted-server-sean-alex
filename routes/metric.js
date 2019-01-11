@@ -25,12 +25,15 @@ router.get('/', (req, res, next) => {
       console.log('total avg', sumSessions);
 
       result.allSessionsAvg = (sumSessions / sumOfQuestions);
+      // const currAvg = result.sessions[result.sessions.length -1].sessionAvg; 
+      // const prevAvg = result.sessions[result.sessions.length -2].sessionAvg; 
+      // result.improvement = (currAvg/prevAvg); 
       result.save();
 
       let allSessionsAvg = result.allSessionsAvg;      
       let recent = result.sessions[result.sessions.length-1].sumScore;
       let recentAvg = result.sessions[result.sessions.length-1].sessionAvg;
-      console.log({lastSessionScore: recent, lastSessionAvg: recentAvg, allSessionsAvg: allSessionsAvg});
+      //let improvement = result.improvement; 
       res.json({lastSessionScore: recent, lastSessionAvg: recentAvg, allSessionsAvg: allSessionsAvg});
     })
     .catch(err => next(err));
@@ -44,17 +47,12 @@ router.post('/startSession', (req, res) => {
   User.findOne({ username })
     .then(result => { 
       
-<<<<<<< HEAD
       const sessions = result.sessions; 
       const sessionsCopy = [...sessions]; 
       sessionsCopy.push([]); 
       result.sessions = sessionsCopy;
       result.save();
-      console.log('End');
       return res.json({message: 'DUDE'});
-=======
-zx
->>>>>>> c14eee716bfb2af37210426f220c69ada422fb69
     })
     .then(result => res.status(200))
     .catch(err => { 
@@ -73,18 +71,11 @@ router.post('/endSession', (req, res) => {
       const userSessions = result.sessions;
 
       let sumSessions =0;
-      userSessions.forEach(item => {
-        sumSessions += item.sumScore;
-      });
-      console.log('total avg', sumSessions);
+      userSessions.forEach(item => sumSessions += item.sumScore);
 
       let sumAnswers =0; 
-      currAnswers.forEach(item => { 
-        console.log(item); 
-        sumAnswers+= item.answer;
-      });
+      currAnswers.forEach(item => sumAnswers+= item.answer);
       
-      console.log('sum', sumAnswers);
       userSessions[userSessions.length- 1].sessionAvg = parseFloat(sumAnswers / userSessions[userSessions.length- 1].answers.length);
       userSessions[userSessions.length- 1].sumScore = sumAnswers;     
       result.save();

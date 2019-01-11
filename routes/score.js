@@ -23,7 +23,6 @@ router.post('/', (req, res, next) => {
       }
 
       const answered = result.questions[answeredIndex];
-      console.log('answered', answered.name)
 
       isValid = (guess === answered.name);
 
@@ -51,7 +50,7 @@ router.post('/', (req, res, next) => {
         const nextIndex = current.next;
         
         if(nextIndex === null){
-          console.log('HOPEFULLY WE DO NOT GET HERE'); 
+          console.error('Error: Next index cannot be null'); 
           break;
         }
         current = result.questions[nextIndex];

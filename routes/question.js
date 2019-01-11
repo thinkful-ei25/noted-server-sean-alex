@@ -18,7 +18,6 @@ router.get('/', (req, res, next) => {
         index = 0; 
       } 
       const question = result.questions[index]; 
-      console.log('head', index, 'question', question.name);
       res.json(question); 
     }); 
 }); 
