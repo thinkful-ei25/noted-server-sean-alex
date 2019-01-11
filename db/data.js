@@ -11,7 +11,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111102', 
-    img: 'https://www.thoughtco.com/thmb/8viKsaXj49Dk5s_fcwBhte3_DRo=/735x0/GL_fermata-music-56a72d325f9b58b7d0e79952.png', 
+    img: 'https://i.imgur.com/SKa1IlN.png', 
     name: 'Fermata', 
     description: 'a pause of unspecified length on a note or rest', 
     memoryStrength: 1,
@@ -27,7 +27,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111104',
-    img: 'http://www.timusic.net/wp-content/uploads/sforzando.jpg', 
+    img: 'https://i.imgur.com/FtbWwOL.jpg', 
     name: 'Sforzando', 
     description: '(especially as a direction) with sudden emphasis', 
     memoryStrength: 1, 
@@ -51,7 +51,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111107', 
-    img: 'https://www.thoughtco.com/thmb/V01b-ZIUXfPPjU7hLOde1k8rmRk=/640x528/filters:no_upscale()/Sustain-PIANO_MUSIC-56a72ea53df78cf7729318b2.png', 
+    img: 'https://i.imgur.com/w0lbNjg.jpg', 
     name: 'Sustain', 
     description: 'A sustain pedal or sustaining pedal is the most commonly used pedal in a modern piano. It is typically the rightmost of two or three pedals. When pressed, the sustain pedal "sustains" all the damped strings on the piano by moving all the dampers away from the strings and allowing them to vibrate freely.', 
     memoryStrength: 1, 
@@ -59,7 +59,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111107', 
-    img: 'http://www.bassflute.co.uk/05-percussive-effects-and-articulation/images/flutter-tonguing.png', 
+    img: 'https://i.imgur.com/mcwSiYv.jpg', 
     name: 'Flutter Tongue', 
     description: 'Flutter-tonguing is a wind instrument tonguing technique in which performers flutter their tongue to make a characteristic "FrrrrFrrrrr" sound.', 
     memoryStrength: 1, 
@@ -67,7 +67,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111108', 
-    img: 'https://cdn3.iconfinder.com/data/icons/music-notes-symbols/512/Icon_54-512.png', 
+    img: 'https://i.imgur.com/40ulGGB.png', 
     name : 'Marcato', 
     description: '(especially as a direction) with emphasis.', 
     memoryStrength: 1, 
@@ -75,7 +75,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111109', 
-    img: 'https://i.pinimg.com/736x/4f/4b/90/4f4b90d225924ed17d117dd1655c181d--music-symbols.jpg', 
+    img: 'https://i.imgur.com/7xUz2OP.jpg', 
     name: 'Tenuto', 
     description: '(especially as a direction) with a note or chord held for its full time value or slightly more.', 
     memoryStrength: 1, 
@@ -83,7 +83,7 @@ const questions = [
   }, 
   { 
     _id: '111111111111111111111110', 
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Middle_C_pizz.png/220px-Middle_C_pizz.png', 
+    img: 'https://i.imgur.com/nJ7kL94.png', 
     name: 'Pizzicato', 
     description: 'used as a direction in music to indicate that notes should be played by plucking the strings of a violin, viola, cello, etc., with the fingers instead of by using a bow', 
     memoryStrength: 1, 
