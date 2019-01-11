@@ -4,12 +4,16 @@ const express = require('express');
 const router = express.Router(); 
 const User = require('../models/user'); 
 
-router.get('/', (req, res) => { 
+router.get('/', (req, res, next) => { 
   const username = req.user.username;
 
   User.findOne({ username })
     .then(result => {
       const userSessions = result.sessions;
+      
+      if (userSessions.length ===0){
+        return res.json({lastSessionAvg: 0});
+      }
 
       let sumSessions =0;
       let sumOfQuestions =0;
@@ -28,11 +32,13 @@ router.get('/', (req, res) => {
       let recentAvg = result.sessions[result.sessions.length-1].sessionAvg;
       console.log({lastSessionScore: recent, lastSessionAvg: recentAvg, allSessionsAvg: allSessionsAvg});
       res.json({lastSessionScore: recent, lastSessionAvg: recentAvg, allSessionsAvg: allSessionsAvg});
-    });
+    })
+    .catch(err => next(err));
 
 }); 
 
 router.post('/startSession', (req, res) => { 
+  
   const username = req.user.username; 
 
   User.findOne({ username })
@@ -41,9 +47,12 @@ router.post('/startSession', (req, res) => {
       const sessions = result.sessions; 
       const sessionsCopy = [...sessions]; 
       sessionsCopy.push([]); 
-      result.sessions = sessionsCopy; 
-      result.save(); 
+      result.sessions = sessionsCopy;
+      result.save();
+      console.log('End');
+      return res.json({message: 'DUDE'});
     })
+    .then(result => res.status(200))
     .catch(err => { 
       console.error('err', err); 
     }); 
@@ -75,6 +84,7 @@ router.post('/endSession', (req, res) => {
       userSessions[userSessions.length- 1].sessionAvg = parseFloat(sumAnswers / userSessions[userSessions.length- 1].answers.length);
       userSessions[userSessions.length- 1].sumScore = sumAnswers;     
       result.save();
+      return res.json({message: 'DUDEZOR'});
     })
     .catch(err => { 
       console.error('err', err); 
