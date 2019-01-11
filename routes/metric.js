@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
       const currAvg = result.sessions[result.sessions.length -1].sessionAvg; 
       if (result.sessions.length >= 2){ 
         const prevAvg = result.sessions[result.sessions.length -2].sessionAvg; 
-        result.improvement = (currAvg/prevAvg); 
+        result.improvement = (currAvg - prevAvg); 
       } 
 
       result.save();
