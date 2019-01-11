@@ -24,7 +24,10 @@ router.post('/', (req, res, next) => {
 
       const answered = result.questions[answeredIndex];
 
-      isValid = (guess === answered.name);
+      let normalizedGuess = guess.toLowerCase();
+      let normalizedAnswer = answered.name.toLowerCase();
+
+      isValid = (normalizedGuess === normalizedAnswer);
 
       //MEMORY STRENGTH SHOULD NOT BE 0
       if (answered.memoryStrength === 0) { 
