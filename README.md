@@ -1,5 +1,5 @@
 # Noteful
-[Client](https://noted-client.herokuapp.com/dashboard)
+[Client](https://noted-client.herokuapp.com)
 [Server](https://noted-server.herokuapp.com/api)
 
 ## Tech Stack
