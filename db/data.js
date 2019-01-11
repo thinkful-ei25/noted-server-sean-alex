@@ -3,7 +3,7 @@
 const questions = [ 
   { 
     _id: '111111111111111111111101',
-    img: 'https://classicalmel.files.wordpress.com/2015/10/glissando.jpg',
+    img: 'https://i.imgur.com/37h7E2B.jpg',
     name: 'Glissando', 
     description: 'a continuous slide upward or downward between two notes', 
     memoryStrength: 1,
