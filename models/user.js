@@ -26,7 +26,7 @@ const schema = new mongoose.Schema(
     }], 
     allSessionsAvg: { type: Number, default: 0}, 
     head: {type: Number, default: 0}, 
-    improvmenet : { type: Number, default: 0 }, 
+    improvement : { type: Number, default: 0 }, 
   },
   {timestamps: true}
 ); 
