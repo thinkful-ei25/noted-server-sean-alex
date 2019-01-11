@@ -44,6 +44,7 @@ router.post('/startSession', (req, res) => {
   User.findOne({ username })
     .then(result => { 
       
+<<<<<<< HEAD
       const sessions = result.sessions; 
       const sessionsCopy = [...sessions]; 
       sessionsCopy.push([]); 
@@ -51,6 +52,9 @@ router.post('/startSession', (req, res) => {
       result.save();
       console.log('End');
       return res.json({message: 'DUDE'});
+=======
+zx
+>>>>>>> c14eee716bfb2af37210426f220c69ada422fb69
     })
     .then(result => res.status(200))
     .catch(err => { 

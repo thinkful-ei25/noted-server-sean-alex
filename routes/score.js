@@ -23,6 +23,7 @@ router.post('/', (req, res, next) => {
       }
 
       const answered = result.questions[answeredIndex];
+      console.log('answered', answered.name)
 
       isValid = (guess === answered.name);
 
