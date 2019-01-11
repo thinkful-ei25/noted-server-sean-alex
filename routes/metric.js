@@ -38,11 +38,7 @@ router.post('/startSession', (req, res) => {
   User.findOne({ username })
     .then(result => { 
       
-      const sessions = result.sessions; 
-      const sessionsCopy = [...sessions]; 
-      sessionsCopy.push([]); 
-      result.sessions = sessionsCopy; 
-      result.save(); 
+zx
     })
     .catch(err => { 
       console.error('err', err); 

@@ -5,32 +5,30 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   { 
-  fullname: { type: String, default: '' }, 
-  username: { type: String, required: true, unique: true }, 
-  password: { type: String, required: true}, 
-  questions : [{
-    _id: mongoose.Schema.Types.ObjectId, 
-    img: String, 
-    name: String,
-    description: String, 
-    memoryStrength: { type: Number, default: 1 },  
-    next: Number
-  }],
-  sessions : [{ 
-    sumScore: { type: Number, default:0},
-    sessionAvg: {type: Number, default:0 },
-    
-    answers: [{ 
-      answer: { type: Number, default: 0},  
-      questionName: { type: String, default: ''} 
-    }]
-  }], 
-  
-  allSessionsAvg: { type: Number, default: 0}, 
-  // numSession: { type: Number, default: 0 }, 
-  // improvmenet : { type: Number, default: 0 }, 
-  head: {type: Number, default: 0}
-  }, 
+    fullname: { type: String, default: '' }, 
+    username: { type: String, required: true, unique: true }, 
+    password: { type: String, required: true}, 
+    questions : [{
+      _id: mongoose.Schema.Types.ObjectId, 
+      img: String, 
+      name: String,
+      description: String, 
+      memoryStrength: Number,  
+      next: Number
+    }],
+    sessions : [{ 
+      sumScore: { type: Number, default: 0 },
+      sessionAvg: { type: Number, default: 0 },
+      answers: [{ 
+        answer: { type: Number, default: 0},  
+        questionName: { type: String, default: ''} 
+      }]
+    }], 
+    allSessionsAvg: { type: Number, default: 0}, 
+    head: {type: Number, default: 0}
+    // numSession: { type: Number, default: 0 }, 
+    // improvmenet : { type: Number, default: 0 }, 
+  },
   {timestamps: true}
 ); 
 
